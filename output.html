@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>LRU Cache Output</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 48px;
+        background: #101827;
+        color: #e5edf8;
+        font:
+          18px/1.6 Consolas,
+          monospace;
+      }
+      main {
+        max-width: 760px;
+        margin: auto;
+        padding: 32px;
+        border: 1px solid #334155;
+        border-radius: 12px;
+        background: #182337;
+      }
+      h1 {
+        margin-top: 0;
+        color: #8be9a8;
+        font:
+          700 24px/1.2 system-ui,
+          sans-serif;
+      }
+      pre {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>LRU Cache - Actual Program Output</h1>
+      <pre>
+    ====================================================
+        TEST 1: STANDARD LRU CACHE EVICTION
+    ====================================================
+    Initialized Cache with capacity = 2
+
+    Action: put("A", 10)
+    Current Cache (MRU -> LRU): A:10
+
+    Action: put("B", 20)
+    Current Cache (MRU -> LRU): B:20 -> A:10
+
+    Action: get("A")
+    Result: 10 (Key "A" accessed, promoted to MRU)
+    Current Cache (MRU -> LRU): A:10 -> B:20
+
+    Action: put("C", 30) -> Triggers eviction
+    Current Cache (MRU -> LRU): C:30 -> A:10
+    Note: "B" was evicted as it was the Least Recently Used.
+
+    Verifying lookups:
+    get("B") -> -1 (Expected: -1 because B was evicted)
+    get("C") -> 30 (Expected: 30)
+    get("A") -> 10 (Expected: 10)
+
+    ====================================================
+         TEST 2: TTL / EXPIRATION DEMO (BONUS)
+    ====================================================
+    Initialized Cache with capacity = 2
+
+    Action: put("tempKey", "val1", ttlMs = 500)
+    Action: put("permKey", "val2") (No TTL)
+
+    Immediate lookup before expiration:
+    get("tempKey") -> val1 (Expected: val1)
+
+    Waiting 600ms for "tempKey" to expire...
+    Lookup after TTL duration:
+    get("tempKey") -> -1 (Expected: -1 [Expired & Purged])
+    get("permKey") -> val2 (Expected: val2 [Still Valid])</pre
+      >
+    </main>
+  </body>
+</html>
